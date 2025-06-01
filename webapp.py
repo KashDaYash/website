@@ -7,7 +7,8 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     files = os.listdir("static/uploads")
-    return render_template("index.html", files=files)
+    videos = [f for f in files if f.endswith(".mp4")]
+    return render_template("index.html", files=videos)
 
 @app.route('/watch/<filename>')
 def watch(filename):
