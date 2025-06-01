@@ -71,11 +71,14 @@
   <div class="video-grid">
     {% for file in files %}
     <a href="/watch/{{ file }}" class="video-card">
-      <img src="/static/uploads/{{ file }}" class="video-thumb" onerror="this.src='https://via.placeholder.com/220x140.png?text=Video';" />
-      <div class="overlay">
-        <i class="fas fa-play play-icon"></i>
-      </div>
-      <div class="video-title">{{ file }}</div>
+  <video class="video-thumb" muted autoplay loop>
+    <source src="/static/uploads/{{ file }}" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <div class="overlay">
+    <i class="fas fa-play play-icon"></i>
+  </div>
+  <div class="video-title">{{ file }}</div>
     </a>
     {% endfor %}
   </div>
