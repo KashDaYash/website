@@ -19,6 +19,6 @@ async def upload_video(_, message):
     msg = await message.reply("Downloading...")
     file_path = await message.reply_to_message.download(file_name="static/uploads/")
     file_name = os.path.basename(file_path)
-    await msg.edit(f"✅ Uploaded\n🎬 [Watch Now](https://yourapp.herokuapp.com/watch/{file_name})", disable_web_page_preview=True)
+    await msg.edit(f"✅ Uploaded\n🎬 [Watch Now](https://streamplayer-3a5dc841635a.herokuapp.com/watch/{file_name})", disable_web_page_preview=True)
 
 bot.run()
