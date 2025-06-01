@@ -3,7 +3,10 @@ import os
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = "static/uploads"
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "static/uploads")
 
 @app.route("/")
 def index():
@@ -15,15 +18,17 @@ def index():
 
 @app.route("/watch/<filename>")
 def watch(filename):
-    # Security check - only serve files from uploads folder
+    print(f"Requested video: {filename}")
+    video_path = os.path.join(UPLOAD_FOLDER, filename)
+    print(f"Full video path: {video_path}")
+    
     if ".." in filename or filename.startswith("/"):
         return "Invalid filename", 400
 
-    video_path = os.path.join(UPLOAD_FOLDER, filename)
     if not os.path.exists(video_path):
+        print("File not found!")
         return "File not found", 404
 
     return render_template("watch.html", filename=filename)
-
 if __name__ == "__main__":
     app.run(debug=True)
