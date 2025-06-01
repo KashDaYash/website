@@ -10,11 +10,11 @@ UPLOAD_FOLDER = os.path.join(BASE_DIR, "static/uploads")
 
 @app.route("/")
 def index():
-    # static/uploads folder me jitni bhi video files hain, unki list lo
     files = os.listdir(UPLOAD_FOLDER)
-    # sirf video files (mp4, mkv, etc) filter karo agar chaho
+    print("Current files:", files)  # 👈 Add this
     video_files = [f for f in files if f.endswith((".mp4", ".mkv", ".webm"))]
     return render_template("index.html", files=video_files)
+
 
 @app.route("/watch/<filename>")
 def watch(filename):
