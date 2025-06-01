@@ -1,0 +1,14 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="/static/video-js/video-js.css" rel="stylesheet" />
+  <script src="/static/video-js/video.min.js"></script>
+</head>
+<body>
+  <video id="my-video" class="video-js" controls preload="auto" width="640" height="264">
+    <source src="/static/uploads/{{ filename }}" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</body>
+</html>

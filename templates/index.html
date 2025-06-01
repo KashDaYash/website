@@ -1,0 +1,15 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>StreamFlix</title>
+</head>
+<body>
+  <h1>Uploaded Videos</h1>
+  <ul>
+    {% for file in files %}
+      <li><a href="/watch/{{ file }}">{{ file }}</a></li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
