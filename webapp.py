@@ -12,7 +12,7 @@ UPLOAD_FOLDER = os.path.join(BASE_DIR, "static/uploads")
 def index():
     files = os.listdir(UPLOAD_FOLDER)
     print("Current files:", files)  # 👈 Add this
-    video_files = [f for f in files if f.endswith((".mp4", ".mkv", ".webm"))]
+    video_files = [f for f in files if f.lower().endswith((".mp4", ".mkv", ".webm"))]
     return render_template("index.html", files=video_files)
 
 
