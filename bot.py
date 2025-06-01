@@ -53,19 +53,14 @@ async def aexec_(code, message, client):
 
     return await exec_scope["__aexec"](m, event, message, client, p)
 
-@app.on_edited_message(excl('eval'))
-@app.on_message(excl('eval'))
+@bot.on_edited_message(excl('eval'))
+@bot.on_message(excl('eval'))
 async def eval(client, message):
     if message.from_user.id != OWNER_ID:
         return
     if len(message.command) == 1:
         return await message.reply("What You Want To Stuff")
     cmd = "".join(message.text.split(None, 1)[1:])
-    if "config.py" in cmd:
-        return await message.reply_text(
-            "#PRIVACY_ERROR\nCan't access config.py`",
-            reply_to_message_id=message.id)
-    print(cmd)
     if not cmd:
         return await message.reply_text("What should I run?")
     eva = await message.reply_text("Running...")
@@ -104,12 +99,6 @@ async def eval(client, message):
                 callback_data="evclose",
             )
         ]])
-        '''bimsi = await app.send_document(chat_id=CHAT_ID,
-            document=filename,
-            caption=
-            f"**INPUT:**\n`cmd[0:980]`\n\n**OUTPUT:**\n`Attached Document`",
-            reply_markup=keyboard)
-        await message.reply(f"Your : [Result]({bimsi.link})",parse_mode=enums.ParseMode.MARKDOWN)'''
         await message.reply_document(document=filename, caption=f"**INPUT:**\n`cmd[0:980]`\n\n**OUTPUT:**\n`Attached Document`",reply_markup=keyboard,parse_mode=enums.ParseMode.MARKDOWN)
         await eva.delete()
         os.remove(filename)
@@ -123,7 +112,7 @@ async def eval(client, message):
         await eva.edit_text(text=final_output, reply_markup=keyboard)
 
 
-@app.on_callback_query(regex('^evclose$'), group=50)
+@bot.on_callback_query(regex('^evclose$'), group=50)
 async def closer(client, q):
     if q.from_user.id != q.message.reply_to_message.from_user.id:
         return
