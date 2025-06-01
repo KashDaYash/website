@@ -1,12 +1,29 @@
-
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Watch Video</title>
   <link href="/static/video-js/video-js.css" rel="stylesheet" />
   <script src="/static/video-js/video.min.js"></script>
+  <style>
+    body {
+      background-color: #000;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .video-js {
+      width: 80vw;
+      height: 45vw;
+      max-width: 1280px;
+      max-height: 720px;
+    }
+  </style>
 </head>
 <body>
-  <video id="my-video" class="video-js" controls preload="auto" width="640" height="264">
+  <video id="my-video" class="video-js" controls preload="auto" data-setup="{}">
     <source src="/static/uploads/{{ filename }}" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
