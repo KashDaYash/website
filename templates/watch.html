@@ -2,8 +2,10 @@
 <html>
 <head>
   <title>Watch Video</title>
-  <link href="/static/video-js/video-js.css" rel="stylesheet" />
-  <script src="/static/video-js/video.min.js"></script>
+  <!-- Load Video.js from CDN -->
+  <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" />
+  <script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
+
   <style>
     body {
       background-color: #000;
@@ -23,7 +25,7 @@
   </style>
 </head>
 <body>
-  <video id="my-video" class="video-js" controls preload="auto" data-setup="{}">
+  <video id="my-video" class="video-js vjs-default-skin" controls preload="auto" data-setup="{}">
     <source src="/static/uploads/{{ filename }}" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
