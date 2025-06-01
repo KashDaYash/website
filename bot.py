@@ -30,10 +30,15 @@ async def upload_video(_, message):
     if not video:
         return await message.reply("Please reply to a video.")
     msg = await message.reply("Downloading...")
-    file_path = await message.reply_to_message.download(file_name="static/uploads/")
-    file_name = os.path.basename(file_path)
-    await msg.edit(f"✅ Uploaded\n🎬 [Watch Now](https://streamplayer-3a5dc841635a.herokuapp.com/watch/{file_name})", disable_web_page_preview=True)
 
+    file_name = f"{video.file_unique_id}.mp4"
+    save_path = os.path.join("static", "uploads", file_name)
+    await message.reply_to_message.download(file_name=save_path)
+
+    await msg.edit(
+        f"✅ Uploaded\n🎬 [Watch Now](https://streamplayer-3a5dc841635a.herokuapp.com/watch/{file_name})",
+        disable_web_page_preview=True
+    )
 excl = lambda cmd, prefixes=['/','.', '!'], cs=True: filters.command(cmd, prefixes, cs)
 cmd = filters.command 
 regex = filters.regex 
