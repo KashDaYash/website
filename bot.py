@@ -16,13 +16,15 @@ import io
 API_ID = int(os.getenv("API_ID"))
 API_HASH = os.getenv("API_HASH")
 BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHAT_ID = -1002074616947
+OWNER_ID = 1302298741
 
 bot = Client("uploader_bot",
              api_id=API_ID,
              api_hash=API_HASH,
              bot_token=BOT_TOKEN)
 
-@bot.on_message(filters.command("upload") & filters.reply)
+@bot.on_message(filters.command("upload") & filters.reply & filters.user(OWNER_ID))
 async def upload_video(_, message):
     video = message.reply_to_message.video
     if not video:
@@ -38,8 +40,6 @@ regex = filters.regex
 IKM =InlineKeyboardMarkup
 IKB = InlineKeyboardButton 
 
-CHAT_ID = -1002074616947
-OWNER_ID = 1302298741
 async def aexec_(code, message, client):
     m = event = message
     p = lambda x: print(x)
