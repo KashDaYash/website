@@ -10,7 +10,7 @@ from time import time
 from pyrogram import filters, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery 
 import io
-
+import aiohttp 
 
 
 API_ID = int(os.getenv("API_ID"))
@@ -123,6 +123,25 @@ async def closer(client, q):
         return
     await q.message.delete()
 
+async def get_yaara_data(endpoint: str):
+    url = f"https://yaaraapi-db1b9186ba12.herokuapp.com/{endpoint}"
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as resp:
+            if resp.status == 200:
+                data = await resp.json()
+                return data.get(endpoint)
+            else:
+                return "tujh se hoga?"
 
+@bot.on_message(filters.command("truth"))
+async def truth_command(_, message):
+    truth = await get_yaara_data("truth")
+    await message.reply_text(f"🧠 Truth:\n{truth}")
+
+# /dare command
+@bot.on_message(filters.command("dare"))
+async def dare_command(_, message):
+    dare = await get_yaara_data("dare")
+    await message.reply_text(f"🎯 Dare:\n{dare}")
 
 bot.run()
